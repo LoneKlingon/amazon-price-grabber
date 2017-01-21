@@ -1,6 +1,6 @@
 import mail
 from urllib.request import urlopen
-URL = 'http://www.amazon.com/Practical-Electronics-Inventors-Paul-Scherz/dp/0071771336'
+URL = 'http://www.amazon.com/Practical-Electronics-Inventors-Paul-Scherz/dp/0071771336' #or enter your own url 
 
 file = urlopen(URL)
 html = file.read()
@@ -10,11 +10,14 @@ soup = BeautifulSoup(html)
 
 
 res  = soup.find('span', {"class" : "a-size-medium a-color-price"})
-print(res.get_text())
-if res.get_text() == '$20.43':
+price = float (res.get_text())
+target = 20.00
+
+
+if price <= target:
 
 
     #Block that just goes here is actually suppoed to send me an email
     #with the message 
-    mail.send_email()
-    print("Message sent")
+    mail.send_email("Price of item is at target price" + str(targeT) )
+    print("Price is lower than" +str(target))
